@@ -23,7 +23,8 @@ function ForgotPassword() {
     axiosInstance
       .post("/password-reset", {
         email,
-        redirect_url: "http://localhost:5173/create-new-password", // TODO clarify redirect_url
+        redirect_url:
+          "https://65f5dd16cdbd16e6c553264c--lucent-pixie-5851c1.netlify.app/create-new-password",
       })
       .then(() => {
         toast.success(
