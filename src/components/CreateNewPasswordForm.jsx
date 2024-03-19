@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { PASSWORD_VALIDATION } from "../constants/validation";
 import Button from "../ui/Button";
 import FormRow from "../ui/FormRow";
-import Input from "../ui/Input";
+import PasswordField from "../ui/PasswordIField";
 
 function CreateNewPasswordForm({ onSubmit, isLoading }) {
   const {
@@ -15,13 +15,12 @@ function CreateNewPasswordForm({ onSubmit, isLoading }) {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <FormRow label="Password" error={errors?.password?.message}>
-        <Input
-          type="password"
+        <PasswordField
           placeholder="Password"
           {...register("password", {
             required: {
               value: true,
-              message: PASSWORD_VALIDATION.requiredMessage,
+              message: PASSWORD_VALIDATION.requiredError,
             },
             minLength: {
               value: PASSWORD_VALIDATION.minLength,
@@ -34,10 +33,13 @@ function CreateNewPasswordForm({ onSubmit, isLoading }) {
         label="Confirm password"
         error={errors?.confirmedPassword?.message}
       >
-        <Input
-          type="password"
+        <PasswordField
           placeholder="Password"
           {...register("confirmedPassword", {
+            required: {
+              value: true,
+              message: PASSWORD_VALIDATION.requiredError,
+            },
             validate: (val) =>
               val === getValues("password") ||
               PASSWORD_VALIDATION.confirmationPasswordError,
